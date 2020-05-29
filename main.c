@@ -54,16 +54,11 @@ static void setOutputs(uint16_t outputs)
 	//Тут младший бит у меня - это кнопка включения круиза, она отдельным портом
 	//Если кнопка нажата, то порт на вывод, а нога в землю.
 	//Если не нажата, то порт на ввод, без подтяжки
-	DDRA = ~((uint8_t)(outputs>>1));
+	DDRA = (uint8_t)(outputs>>1);
 	PORTA = 0;
 
 	//Вот та самая кнопка включения круиза.
 	PORTB = (PORTB & 0xBF) | ((outputs & 1)<<6);
-
-//	if (PORTA & _BV(PA0))
-//						PORTA &= ~_BV(PA0);
-//					else
-//						PORTA |= _BV(PA0);
 }
 
 int main (void)
